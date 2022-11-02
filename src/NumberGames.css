@@ -1,0 +1,21 @@
+.winner{
+    color:green;
+}
+.looser{
+    color:red;
+}
+/* .NumberGames-conainer1 {
+    display: flex;
+} */
+
+.NumberGames-container {
+    margin: 0;
+    padding-bottom: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid black;
+    max-width: 350px;
+    margin-top: 20px;
+}
