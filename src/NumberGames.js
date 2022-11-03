@@ -1,46 +1,35 @@
-import React from 'react';
-import { useState} from 'react';
-import "./NumberGames.css";
-
- 
-const NumberGames = (props) => {
-    const randomNumber = () =>  Math.floor(Math.random() * 8) + 1 ;
-
-    const [placeholder, placeholder2] = useState(randomNumber());
-    const [target, setTarget] = useState(randomNumber());
-    const [guessCount, setGuessCount] = useState(0);
+import React, { useState } from 'react';
+import './NumberGames.css';
 
 
-    const isWinner = placeholder == target;
+const NumberGame = (props) => {
+    // Functions-----------------------------------------------------------------
+    const genRandom = () => Math.floor(Math.random() * 6) + 1
 
     const restart = () => {
-        setTarget(randomNumber())
-        placeholder2(0)
+        setTarget(genRandom())
+        setGuess(null)
         setGuessCount(0)
     }
-
     const makeGuess = () => {
-        placeholder2(randomNumber());
+        setGuess(genRandom())
         setGuessCount(guessCount + 1)
-
     }
 
+    // UseStates--------- --------------------------------------------------------
+    const [guess, setGuess] = useState(genRandom)
+    const [target, setTarget] = useState(genRandom) 
+    const [guessCount, setGuessCount] = useState(0)
+    const isWinner = target === guess;
+  
     return (
         <>
-        <div className="NumberGames-conainer1">
-        <div className='NumberGames-container'>
-        <h1 className= {target == placeholder ? 'winner': "looser"}>TargetNumber: {target}</h1>
-        <div>Number of guesses so far: {guessCount}</div>
-        <h1 style={{color: target == placeholder ? 'green' : "red"}}>Your Guess: {placeholder}</h1>
-        {!isWinner && 
-         <button onClick={makeGuess}>Generating Random Number</button> }
+        <h1>Target Num: {target}</h1>
+        <h1 style={{ color: isWinner ? 'green':'red' }}>Your Guess: {guess}</h1>
+        <h4>Guesses so far: {guessCount}</h4>
+         {!isWinner && <button onClick={makeGuess}>Generate Number</button>}
          <button onClick={restart}>New Game</button>
-        </div>
-        </div>
         </>
     ) 
-
-
-}
-
-export default NumberGames;
+} 
+export default NumberGame;
